@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from "axios";
+import { Navigate } from 'react-router-dom';
 
 function Register() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   function registerUser(e) {
     try {
@@ -16,10 +18,16 @@ function Register() {
         email,
         password
       })
+      alert("Registered!");
+      setRedirect(true);
     }
     catch (err) {
       console.log(err);
     }
+  }
+
+  if(redirect){
+    return <Navigate to={'/login'}/>
   }
 
   return (
